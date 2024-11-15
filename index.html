@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Gist</title>
+</head>
+<body>
+  <h2>Update JSON Data in Gist</h2>
+  <form id="gistForm">
+    <label for="newData">Enter New Data (just the text):</label>
+    <textarea id="newData" rows="5" cols="30"></textarea><br><br>
+    <button type="submit">Update Gist</button>
+  </form>
+
+  <script>
+    document.getElementById('gistForm').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      const newData = document.getElementById('newData').value;
+
+      // Wrap the user's input in the JSON structure we need
+      const wrappedData = { "message": newData };
+
+      // https://0f44-193-170-99-192.ngrok-free.app/
+      try {
+        const response = await fetch('https://0f44-193-170-99-192.ngrok-free.app/update-gist', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ data: wrappedData.message })
+        });
+
+        const result = await response.json();
+        alert(result.message || result.error);
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Failed to update the Gist');
+      }
+    });
+  </script>
+</body>
+</html>
