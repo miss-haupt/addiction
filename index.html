@@ -21,9 +21,8 @@
       // Wrap the user's input in the JSON structure we need
       const wrappedData = { "message": newData };
 
-      // https://0f44-193-170-99-192.ngrok-free.app/
       try {
-        const response = await fetch('https://0f44-193-170-99-192.ngrok-free.app/update-gist', {
+        const response = await fetch('https://addiction-updater-live.onrender.com/update-gist', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
